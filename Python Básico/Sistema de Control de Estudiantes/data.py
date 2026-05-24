@@ -20,8 +20,7 @@ def read_students_grades(file_path):
 
     except FileNotFoundError as e:
         print(f"Error [FileNotFoundError]: El archivo {file_path} no fue encontrado. Detalles: {e}")
-        print("Cerrando el programa...")
-        exit()
+
     except Exception as e:
         print(f"Ocurrió un error al leer el archivo: {e}")
 

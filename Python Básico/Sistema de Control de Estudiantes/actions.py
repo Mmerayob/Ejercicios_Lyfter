@@ -1,3 +1,4 @@
+import copy
 
 def add_new_student(students):
 
@@ -7,6 +8,18 @@ def add_new_student(students):
 
         name = is_valid_name()
         group = is_valid_group ()
+
+        duplicate_found = False
+        for student in students:
+            if student["name"].lower() == name.lower() and student["group"].lower() == group.lower():
+                duplicate_found = True
+                break
+        
+        if duplicate_found:
+            print(f"El estudiante '{name}' ya está registrado en la sección '{group}'.")
+            print("Intente de nuevo con otro nombre o sección.\n")
+            continue
+
         spanish_grade = request_grade ("español")
         english_grade = request_grade ("inglés")
         social_studies_grade = request_grade ("sociales")
@@ -59,34 +72,33 @@ def is_valid_name ():
 
 def is_valid_group():
 
-    # Como el ejercicio no específicaba a detalle el rango de grupos tomé como supuesto que
-    # los grupos están entre el grado 1 y 11, además que solo existe 'A', 'B', 'C', 'D' por número.
-
-    valid_letters = ['A', 'B', 'C', 'D']
-
     while True:
-        group = input("Ingrese la sección del estudiante (Ej: 10A): ").upper()
+        group = input("Ingrese la sección del estudiante (Ej: 10A): ").strip().upper()
+        
+        if len(group) < 2:
+            print("Error: El formato de sección no es válido (Debe tener números y una letra.")
+            continue
         
         grade_part = group[:-1]
         letter_part = group[-1]
 
-        if letter_part not in valid_letters:
-            print("Error: La letra debe ser A, B, C o D. Intentelo de nuevo.")
+        if not letter_part.isalpha():
+            print("Error: La segunda parte del grupo debe ser una letra.")
             continue
 
         if not grade_part.isdigit():
             print("Error: La primera parte debe ser un número entero. Intentelo de nuevo.")
             continue
 
-        number = int(grade_part)
-        if not (1 <= number <= 11):
-            print("Error: El grado debe estar entre 1 y 11. Intentelo de nuevo.")
-            continue
-
         return group
 
 
 def display_student_list(student_list):
+
+    if not student_list:
+        print("No hay estudiantes registrados.")
+        return
+
     for student in student_list:
         print(f"Nombre: {student['name']}")
         print(f"Sección: {student['group']}")
@@ -99,8 +111,8 @@ def display_student_list(student_list):
 
 def add_average_student_grades (student_list):
 
-    average_students = student_list #Nueva lista que incluye el promedio de las notas
-
+    average_students = copy.deepcopy(student_list) #Nueva lista que incluye el promedio de las notas
+    
     for student in average_students:
         total = (student["spanish_grade"] + 
                 student["english_grade"] + 
@@ -112,6 +124,10 @@ def add_average_student_grades (student_list):
 
 
 def display_top3_average_student_grades (student_list):
+
+    if not student_list:
+        print("No hay estudiantes en el sistema para calcular el Top 3.")
+        return
 
     average_students = add_average_student_grades(student_list)
 
@@ -127,23 +143,37 @@ def display_top3_average_student_grades (student_list):
 
 def display_average_student_grades (student_list):
 
-    average_students = add_average_student_grades(student_list)
+    student_count = 0
+    grades_sum = 0
 
-    for student in average_students:
+    for student in student_list:
+
+        grades_sum += (student["spanish_grade"] + 
+                student["english_grade"] + 
+                student["social_studies_grade"] + 
+                student["science_grade"])
         
-        print(f"Nombre:: {student['name']}")
-        print(f"Sección: {student['group']}")
-        print(f"Nota Promedio: {student['average']}")
-        print("--------------------------------------")
+        student_count += 1
+    try:
+        total_average = (grades_sum / student_count) / 4
+    except ZeroDivisionError as e:
+        print(f"Error [ZeroDivisionError]: La cantidad de estuadiantes es 0 por lo tanto no se puede dividir. Detalles: {e} ")
+        return 
+    
+    print(f"La nota promedio total entre todos los estudiantes es: {total_average}")
 
 
 def display_failed_grades(student_list):
+
+    failed_student = False
 
     for student in student_list:
         if (student['spanish_grade'] < 60 or
             student['english_grade'] < 60 or
             student['social_studies_grade'] < 60 or
             student['science_grade'] < 60):
+            
+            failed_student = True
 
             print("--------------------------------------") 
             print(f"Nombre: {student['name']}")
@@ -161,7 +191,9 @@ def display_failed_grades(student_list):
                 
             if student['science_grade'] < 60:
                 print(f"    Nota de ciencias: {student['science_grade']}")
-
+                
+    if not failed_student:
+        print("No hay estudiantes reprobados.")
 
 def remove_student_from_list(student_list):
 
