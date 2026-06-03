@@ -111,7 +111,7 @@ def display_student_list(student_list):
 
 def add_average_student_grades (student_list):
 
-    average_students = copy.deepcopy(student_list) #Nueva lista que incluye el promedio de las notas
+    average_students = copy.deepcopy(student_list) #New list with the listed averages
     
     for student in average_students:
         total = (student["spanish_grade"] + 
@@ -142,6 +142,10 @@ def display_top3_average_student_grades (student_list):
 
 
 def display_average_student_grades (student_list):
+
+    if not student_list:
+        print("No hay estudiantes en el sistema para calcular el promedio de las notas.")
+        return
 
     student_count = 0
     grades_sum = 0
@@ -201,9 +205,9 @@ def remove_student_from_list(student_list):
     search_group = is_valid_group()
 
     for student in student_list:
-        if student['name'] == search_student and student['group'] == search_group:
+        if student['name'].upper() == search_student.upper() and student['group'].upper() == search_group.upper():
             print(f"¿Está seguro que quiere eliminar al estudiante {student['name']} de la lista?. ")
-            option = input("S/N").upper().strip()
+            option = input("S/N: ").upper().strip()
             if option == "S":
                 student_list.remove(student)
                 print(F"El estudiante {student['name']} ha sido eliminado con exito.")
@@ -212,3 +216,22 @@ def remove_student_from_list(student_list):
             return
 
     print("No se encontró ningún estudiante con ese nombre y sección.")
+
+
+def merge_imported_students(current_students, imported_students):
+
+    if not imported_students:
+        return
+    
+    for imported_student in imported_students:
+        
+        is_duplicate = any(
+            s["name"].lower() == imported_student["name"].lower() and 
+            s["group"].lower() == imported_student["group"].lower()
+            for s in current_students
+        )
+        
+        if not is_duplicate:
+            current_students.append(imported_student)
+    
+    print(f"\nProceso de importación finalizado:")

@@ -1,5 +1,5 @@
 from actions import (add_new_student, display_student_list, display_average_student_grades,
-                     display_top3_average_student_grades,display_failed_grades,remove_student_from_list)
+                     display_top3_average_student_grades,display_failed_grades,remove_student_from_list,merge_imported_students)
 from data import read_students_grades, write_students_grades
 
 def menu(students):
@@ -30,7 +30,7 @@ def menu(students):
                     route = input("Ingrese el nombre del archivo CSV que quiere leer (sin .csv): ").strip()
                     if route:
                         imported_data = read_students_grades(route + ".csv")
-                        students.extend(imported_data)
+                        merge_imported_students(students, imported_data)
                 case 8:
                     if not students:
                         print("No hay estudiantes registrados en el sistema para exportar.")
