@@ -5,20 +5,16 @@ class Product:
         self.price = price
 
 def register_IVA(func):
-    def wrapper(product):
-
-        print(f"El precio del producto antes del IVA es: {product.price}")
+    def wrapper(*args, **kwargs):
             
-        result = func(product)
-
-        print(f"El monto del IVA es {result}")
+        result = func(*args, **kwargs)
 
         return result
     return wrapper
 
 @register_IVA
 def calculate_IVA(product):
-    return product.price * 0.13
+    print(product.price * 0.13)
 
-my_product = Product(100)
+my_product = Product(150)
 calculate_IVA(my_product)
