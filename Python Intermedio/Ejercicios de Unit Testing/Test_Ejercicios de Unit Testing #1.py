@@ -22,9 +22,11 @@ def test_bubble_sort_big_list_correctly():
 
     list_input = random.sample(range(-50,200),200)
 
+    expected_output = sorted(list_input)
+
     bubble_sort(list_input)
 
-    assert list_input == sorted(list_input)
+    assert list_input == expected_output
 
 
 def test_bubble_sort_blank_list_works():

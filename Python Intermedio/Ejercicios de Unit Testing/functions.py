@@ -7,9 +7,6 @@ def sum_list (list):
         sum_numbers = sum_numbers + index
     return sum_numbers
     
-result = sum_list ([4,6,2,29])
-print(f"El resultado de la suma de la lista es: ",result)
-
 
 """4. Cree una función que le dé la vuelta a un string y lo retorne."""
 
@@ -19,7 +16,6 @@ def reverse_string (my_string):
         new_phrase += my_string[char]
     return new_phrase
 
-print(reverse_string("Hola mundo"))
 
 """5. Cree una función que imprima el número de mayúsculas y el número de minúsculas en un string."""
 def print_lower_upper_number_strings (string):
@@ -44,8 +40,6 @@ def print_phrase_sorted_alphabetically (string):
 
     return new_phrase
 
-print(print_phrase_sorted_alphabetically ("python-variable-funcion-computadora-monitor"))
-
 
 """7. Cree una función que acepte una lista de números y retorne una lista con los números primos de la misma."""
 
@@ -67,4 +61,13 @@ def create_new_list (list_numbers):
             new_list.append(number)
     return new_list
 
-print(create_new_list ([1, 4, 6, 7, 13, 9, 67]))
+
+if __name__ == '__main__':
+    result = sum_list([4, 6, 2, 29])
+    print("El resultado de la suma de la lista es:", result)
+
+    print(reverse_string("Hola mundo"))
+
+    print(print_phrase_sorted_alphabetically("python-variable-funcion-computadora-monitor"))
+
+    print(create_new_list([1, 4, 6, 7, 13, 9, 67]))
