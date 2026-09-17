@@ -1,0 +1,62 @@
+{
+    "categories": [
+        {
+            "name": "Salario",
+            "color": "#a0a0a0"
+        },
+        {
+            "name": "Transporte",
+            "color": "#ffff80"
+        },
+        {
+            "name": "Ventas",
+            "color": "#80ffff"
+        },
+        {
+            "name": "Pago pr\u00e9stamo",
+            "color": "#ff80ff"
+        }
+    ],
+    "transactions": [
+        {
+            "date": "31/08/2026",
+            "name": "Salario Agosto",
+            "amount": 2000.0,
+            "category": {
+                "name": "Salario",
+                "color": "#a0a0a0"
+            },
+            "type": "Ingreso"
+        },
+        {
+            "date": "17/09/2026",
+            "name": "Gasolina",
+            "amount": 100.0,
+            "category": {
+                "name": "Transporte",
+                "color": "#ffff80"
+            },
+            "type": "Gasto"
+        },
+        {
+            "date": "06/09/2026",
+            "name": "Venta de productos",
+            "amount": 250.0,
+            "category": {
+                "name": "Ventas",
+                "color": "#80ffff"
+            },
+            "type": "Gasto"
+        },
+        {
+            "date": "16/09/2026",
+            "name": "Pago pr\u00e9stamo Setiembre",
+            "amount": 250.0,
+            "category": {
+                "name": "Pago pr\u00e9stamo",
+                "color": "#ff80ff"
+            },
+            "type": "Gasto"
+        }
+    ]
+}
