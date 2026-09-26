@@ -1,9 +1,9 @@
 from datetime import datetime
 
 class Transaction:
-    def __init__(self,date,name,amount,category,type):
+    def __init__(self,date,name,amount,category,transaction_type):
 
-        if type != "Ingreso" and type != "Gasto":
+        if transaction_type != "Ingreso" and transaction_type != "Gasto":
             raise ValueError("El tipo de transacción solo puede ser Ingreso o Gasto.")
             
         if amount <= 0:
@@ -13,7 +13,7 @@ class Transaction:
         self.name = name
         self.amount = amount
         self.category = category
-        self.type = type
+        self.type = transaction_type
 
 class Category:
     def __init__(self,name,color):

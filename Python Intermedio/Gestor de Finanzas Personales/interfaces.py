@@ -36,6 +36,68 @@ def parse_amount(amount_string):
         sg.popup_error("El monto debe ser un número válido")
         return None
 
+def validate_isnot_future_date(selected_date):
+
+    parse_date = datetime.strptime(selected_date, "%d/%m/%Y").date()
+    return parse_date <= date.today()
+
+def validate_required_fields(selected_date,selected_title,selected_amount,selected_category):
+
+    if(not selected_date
+        or not selected_title
+        or not selected_amount
+        or not selected_category 
+    ):
+        return False
+    return True
+
+def process_transaction_form(values,manager,transaction_type):
+
+    date_values = values["-DATE-"]
+    title_values = values["-TITLE-"]
+    amount_values = values["-AMOUNT-"]
+    category_values = values["-CATEGORY-"]
+
+    # Validate all fields were filled
+    if not validate_required_fields(date_values,title_values,amount_values,category_values):
+        sg.popup_error("Debe llenar todos los campos obligatorios.")
+        return False
+
+    # Validate date is not in the future
+    if not validate_isnot_future_date(date_values):
+        sg.popup_error("No se pueden registrar movimientos con fecha futura.")
+        return False
+
+    # Validate amount format
+    amount_validated = parse_amount(amount_values)
+    if amount_validated is None:
+        return False
+
+    category_obj = next(c for c in manager.category_list if c.name == category_values)
+
+    new_trans = Transaction(
+        date=date_values,
+        name=title_values,
+        amount=amount_validated,
+        category=category_obj,
+        transaction_type=transaction_type
+        )
+
+    manager.add_transaction(new_trans)
+    save_data(manager)
+
+    return True
+
+def get_category_names(manager):
+
+    if not manager.has_categories():
+        sg.popup_error(
+            "Debe crear al menos una categoría antes de registrar un movimiento."
+        )
+        return None
+    return [cat.name for cat in manager.category_list]
+
+
 
 headings=["Fecha", "Título", "Monto", "Categoría", "Tipo"]
 
@@ -87,9 +149,10 @@ def make_layout_expense(category_list):
 def make_layout_category():
     return [
         [sg.Text("Nombre:"),sg.Input(key="-NAME-",size=(35,1))],
-        [sg.Text("Color de Categría:"),sg.Input(key="-COLOR-",size=(15,1)),sg.ColorChooserButton("Elegir Color",target=("-COLOR-"))],
+        [sg.Text("Color de Categoría:"),sg.Input(key="-COLOR-",size=(15,1)),sg.ColorChooserButton("Elegir Color",target=("-COLOR-"))],
         [sg.Button("Guardar"), sg.Button("Cancelar")],
     ]
+
 
 window = sg.Window("Gestor de Finanzas Personales", layout,resizable=True)
 
@@ -125,129 +188,49 @@ while True:
         window["-TABLE-"].update(
             values=get_table_data(manager), row_colors=get_row_colors(manager)
         )
-    
-    # Income Window:
-    
-    if event_main == "Añadir Ingreso":
-        if not manager.has_categories():
-            sg.popup_error("Debe crear al menos una categoría antes de registrar un movimiento.")
 
-        else:
-            category_names = [cat.name for cat in manager.category_list]
-            window_income = sg.Window("Añadir Ingresos", make_layout_income(category_names))
+# Income Window:
+    if event_main == "Añadir Ingreso":
+        category_names = get_category_names(manager)
+        if category_names is not None:
+            window_income = sg.Window(
+                "Añadir Ingresos", make_layout_income(category_names)
+            )
 
             while True:
                 event_income, values_income = window_income.read()
 
-                # Save data
                 if event_income == "Guardar":
-                    if (
-                        not values_income["-DATE-"]
-                        or not values_income["-TITLE-"]
-                        or not values_income["-AMOUNT-"]
-                        or not values_income["-CATEGORY-"]
-                    ):
-                        sg.popup_error("Debe llenar todos los campos para poder guardar el ingreso.")
-                        continue
-
-                    # Validate date is not in the future
-                    
-                    selected_date = datetime.strptime(values_income["-DATE-"], "%d/%m/%Y").date()
-                    if selected_date > date.today():
-                        sg.popup_error("No se pueden registrar movimientos con fecha futura.")
-                        continue
-                    
-                    # Validate amount format
-                    
-                    amount_validation = parse_amount(values_income["-AMOUNT-"])
-                    if amount_validation is None:
-                        continue
-
-                    selected_cat_name = values_income["-CATEGORY-"]
-
-                    category_obj = next(c for c in manager.category_list if c.name == selected_cat_name)
-
-                    new_trans = Transaction(
-                        date=values_income["-DATE-"],
-                        name=values_income["-TITLE-"],
-                        amount=amount_validation,
-                        category=category_obj,
-                        type="Ingreso",
-                    )
-
-                    manager.add_transaction(new_trans)
-                    save_data(manager)
-
-                    window["-TABLE-"].update(values=get_table_data(manager))
-                    window["-TABLE-"].update(row_colors=get_row_colors(manager))
-                    break
+                    if process_transaction_form(values_income, manager, "Ingreso"):
+                        window["-TABLE-"].update(values=get_table_data(manager))
+                        window["-TABLE-"].update(row_colors=get_row_colors(manager))
+                        break
 
                 if event_income in (sg.WIN_CLOSED, "Cancelar"):
                     break
 
             window_income.close()
 
-
     # Expense Window:
-
     if event_main == "Añadir Gasto":
-
-        if not manager.has_categories():
-                sg.popup_error("Debe crear al menos una categoría antes de registrar un movimiento.")
-        else:
-            category_names = [cat.name for cat in manager.category_list]
-            window_expense = sg.Window("Añadir Gastos", make_layout_expense(category_names))
+        category_names = get_category_names(manager)
+        if category_names is not None:
+            window_expense = sg.Window(
+                "Añadir Gastos", make_layout_expense(category_names))
 
             while True:
                 event_expense, values_expense = window_expense.read()
 
-                # Save Data
-                
                 if event_expense == "Guardar":
+                    if process_transaction_form(values_expense, manager, "Gasto"):
+                        window["-TABLE-"].update(values=get_table_data(manager))
+                        window["-TABLE-"].update(row_colors=get_row_colors(manager))
+                        break
 
-                    if (
-                        not values_expense["-DATE-"]
-                        or not values_expense["-TITLE-"]
-                        or not values_expense["-AMOUNT-"]
-                        or not values_expense["-CATEGORY-"] 
-                        ):
-                        sg.popup_error("Debe llenar todos los campos para poder guardar el gasto.")
-                        continue
-
-                    # Validate date is not in the future
-                                        
-                    selected_date = datetime.strptime(values_expense["-DATE-"], "%d/%m/%Y").date()
-                    if selected_date > date.today():
-                        sg.popup_error("No se pueden registrar movimientos con fecha futura.")
-                        continue
-
-                    # Amount format validation
-                    amount_validation = parse_amount(values_expense["-AMOUNT-"])
-                    if amount_validation is None:
-                        continue
-
-                    selected_cat_name = values_expense["-CATEGORY-"]
-                    category_obj = next(c for c in manager.category_list if c.name == selected_cat_name)    
-
-                    new_trans = Transaction(
-                        date=values_expense["-DATE-"],
-                        name=values_expense["-TITLE-"],
-                        amount=amount_validation,
-                        category=category_obj,
-                        type="Gasto",
-                    )
-
-                    manager.add_transaction(new_trans)
-                    save_data(manager)
-
-                    window["-TABLE-"].update(values=get_table_data(manager))
-                    window["-TABLE-"].update(row_colors=get_row_colors(manager))
+                if event_expense in (sg.WIN_CLOSED, "Cancelar"):
                     break
 
-                if event_expense in (sg.WIN_CLOSED,"Cancelar"):
-                    break
-                
-        window_expense.close()
+            window_expense.close()
 
 
     # Category Window:
@@ -259,14 +242,23 @@ while True:
                 event_category, values_category = window_category.read()
                     
                 if event_category == "Guardar":
+
+                    #Validate empty fields
                     if not values_category["-NAME-"] or not values_category["-COLOR-"]:
                         sg.popup_error("Por favor ingresa un nombre y selecciona un color.")
-                    else:
-                        new_cat = Category(
-                            name=values_category["-NAME-"], color=values_category["-COLOR-"]
+                        continue
+
+                    #Validate duplicate category name
+                    clean_name = values_category["-NAME-"].strip().lower()
+                    if any(c.name.strip().lower() == clean_name for c in manager.category_list):
+                        sg.popup_error("La categoría que intentó ingresar ya existe.")
+                        continue
+
+                    new_cat = Category(
+                        name=values_category["-NAME-"], color=values_category["-COLOR-"]
                         )
-                        manager.add_category(new_cat)
-                        save_data(manager)
+                    manager.add_category(new_cat)
+                    save_data(manager)
                     break
 
                 if event_category in (sg.WIN_CLOSED,"Cancelar"):
@@ -280,11 +272,11 @@ while True:
         if not manager.transaction_list:
             sg.popup_error("No hay transacciones registradas para exportar.")
         else:
-            csv_saved = export_csv_data("reporte_finanzas.csv", manager)
+            csv_saved, message = export_csv_data(manager)
             if csv_saved:
-                sg.popup("Los datos fueron exportados a reporte_finanzas.csv con éxito")
+                sg.popup(message,title="Éxito")
             else:
-                sg.popup_error("Ocurrió un error al intentar exportar los datos.")
+                sg.popup_error(message,title="Error al Exportar")
 
 window.close()
 

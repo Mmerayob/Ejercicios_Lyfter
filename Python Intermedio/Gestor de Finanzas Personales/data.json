@@ -1,0 +1,52 @@
+{
+    "categories": [
+        {
+            "name": "Salario",
+            "color": "#80ffff"
+        },
+        {
+            "name": "Ingreso por Ventas",
+            "color": "#ffff80"
+        },
+        {
+            "name": "Transporte",
+            "color": "#ff8080"
+        },
+        {
+            "name": "Comida",
+            "color": "#ff80ff"
+        }
+    ],
+    "transactions": [
+        {
+            "date": "22/09/2026",
+            "name": "Cena Restaurante",
+            "amount": 35.0,
+            "category": {
+                "name": "Comida",
+                "color": "#ff80ff"
+            },
+            "type": "Gasto"
+        },
+        {
+            "date": "22/09/2026",
+            "name": "Salario Setiembre",
+            "amount": 3000.0,
+            "category": {
+                "name": "Salario",
+                "color": "#80ffff"
+            },
+            "type": "Ingreso"
+        },
+        {
+            "date": "25/09/2026",
+            "name": "Ventas del d\u00eda",
+            "amount": 300.0,
+            "category": {
+                "name": "Ingreso por Ventas",
+                "color": "#ffff80"
+            },
+            "type": "Ingreso"
+        }
+    ]
+}

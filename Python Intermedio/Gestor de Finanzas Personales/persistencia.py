@@ -1,8 +1,12 @@
 import json
 import csv
+import os
 
 from logica import Transaction, Category
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_JSON_PATH = os.path.join(BASE_DIR, "data.json")
+DEFAULT_CSV_PATH = os.path.join(BASE_DIR,"reporte_finanzas.csv")
 
 def category_to_dict(categ):
     return {"name": categ.name, "color": categ.color}
@@ -13,7 +17,7 @@ def transaction_to_dict(transac):
         "category": category_to_dict(transac.category), "type": transac.type}
 
 
-def save_data(manager, filename="data.json"):
+def save_data(manager, filename=DEFAULT_JSON_PATH):
     
     categories_list = [category_to_dict(cat) for cat in manager.category_list]
 
@@ -35,7 +39,7 @@ def dict_to_transaction(data):
     return Transaction(data["date"],data["name"],data["amount"],dict_to_category(data["category"]),data["type"])
 
 
-def load_data(manager, filename="data.json"):
+def load_data(manager, filename=DEFAULT_JSON_PATH):
 
     try:
         with open(filename,"r") as f:
@@ -47,7 +51,7 @@ def load_data(manager, filename="data.json"):
     except FileNotFoundError:
         pass
 
-def export_csv_data(file_path, manager):
+def export_csv_data(manager,file_path=DEFAULT_CSV_PATH):
 
     headers = ["Fecha","Título","Monto","Categoría","Tipo"]
 
@@ -71,7 +75,10 @@ def export_csv_data(file_path, manager):
             file.write(f"Gastos: ₡{manager.calculate_total_expense():.0f}\n")
             file.write(f"Balance Neto: ₡{manager.calculate_overall_balance():.0f}\n")
 
-        return True
+        return True, "Los datos fueron exportados a reporte_finanzas.csv con éxito."
 
+    except PermissionError:
+        return False, "Error: El archivo está abierto en otra aplicación o no hay permisos."
+    
     except Exception as e:
-        return False
+        return False, f"Error al crear el archivo: {e}"

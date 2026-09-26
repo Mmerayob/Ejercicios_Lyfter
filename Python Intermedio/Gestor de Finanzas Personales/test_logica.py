@@ -27,7 +27,7 @@ def test_has_categories(manager):
     manager.add_category(category)
     assert manager.has_categories() is True
 
-def test_has_categories_cuando_esta_vacia(manager):
+def test_has_categories_when_empty(manager):
     assert manager.has_categories() is False
 
 def test_calculate_total_income(manager):
