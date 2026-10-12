@@ -1,14 +1,14 @@
-# Cache de compilación de Python
+# Cache compilation
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Entornos virtuales
+# Virtual ent
 env/
 venv/
 .venv/
 
-# Archivos de configuración de IDEs
+# IDEs configurations files
 .vscode/
 .idea/
