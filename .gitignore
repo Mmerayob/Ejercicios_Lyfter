@@ -1,0 +1,23 @@
+# Cache compilation
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual enviorment
+env/
+venv/
+.venv/
+
+# IDEs configurations files
+.vscode/
+.idea/
+
+# Data files
+*.csv
+*.json
+
+# Logs & Temp files
+*.log
+*.tmp
