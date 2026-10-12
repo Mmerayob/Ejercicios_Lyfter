@@ -27,6 +27,14 @@ class FinanceManager:
         self.category_list = []
 
     def add_category(self, category):
+
+        category.name = category.name.strip()
+        clean_name = category.name.lower()
+        
+        # Validate duplicate category names
+        if any(c.name.strip().lower() == clean_name for c in self.category_list):
+            raise ValueError("La categoría que intentó ingresar ya existe.")
+            
         self.category_list.append(category)
 
     def has_categories(self):

@@ -48,7 +48,7 @@ def load_data(manager, filename=DEFAULT_JSON_PATH):
         manager.category_list = [dict_to_category(cat) for cat in data.get("categories", [])]
         manager.transaction_list = [dict_to_transaction(trans) for trans in data.get("transactions",[])]
 
-    except FileNotFoundError:
+    except (FileNotFoundError,json.JSONDecodeError):
         pass
 
 def export_csv_data(manager,file_path=DEFAULT_CSV_PATH):
@@ -71,9 +71,9 @@ def export_csv_data(manager,file_path=DEFAULT_CSV_PATH):
             
             file.write("\n")
             file.write("Totales:\n")
-            file.write(f"Total de ingresos: ₡{manager.calculate_total_income():.0f}\n")
-            file.write(f"Gastos: ₡{manager.calculate_total_expense():.0f}\n")
-            file.write(f"Balance Neto: ₡{manager.calculate_overall_balance():.0f}\n")
+            file.write(f"Total de ingresos: ${manager.calculate_total_income():.0f}\n")
+            file.write(f"Gastos: ${manager.calculate_total_expense():.0f}\n")
+            file.write(f"Balance Neto: ${manager.calculate_overall_balance():.0f}\n")
 
         return True, "Los datos fueron exportados a reporte_finanzas.csv con éxito."
 

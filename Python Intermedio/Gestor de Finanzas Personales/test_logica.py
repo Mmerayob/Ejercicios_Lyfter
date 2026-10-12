@@ -65,3 +65,39 @@ def test_calculate_overall_balance(manager):
     manager.add_transaction(expense)
 
     assert manager.calculate_overall_balance() == 1500
+
+
+def test_filter_by_date_range_success(manager):
+    category_ingreso = Category("Salario", "#00FF00")
+    category_expense = Category("Comida", "#FF0000")
+
+    transaction_1 = Transaction("01/08/2026", "Nomina", 2000, category_ingreso, "Ingreso")
+    transaction_2 = Transaction("15/08/2026", "Almuerzo", 300, category_expense, "Gasto")
+    transaction_3 = Transaction("31/08/2026", "Cena", 200, category_expense, "Gasto")
+    transaction_4 = Transaction("05/09/2026", "Gasolina", 100, category_expense, "Gasto")
+
+    manager.add_transaction(transaction_1)
+    manager.add_transaction(transaction_2)
+    manager.add_transaction(transaction_3)
+    manager.add_transaction(transaction_4)
+
+    filtered_list = manager.filter_by_date_range("01/08/2026", "31/08/2026")
+
+    assert len(filtered_list) == 3
+    assert transaction_1 in filtered_list
+    assert transaction_2 in filtered_list
+    assert transaction_3 in filtered_list
+    assert transaction_4 not in filtered_list
+
+
+def test_filter_by_date_range_no_results(manager):
+    category_ingreso = Category("Salario", "#00FF00")
+
+    transaction_1 = Transaction("01/08/2026", "Nomina", 2000, category_ingreso, "Ingreso")
+
+    manager.add_transaction(transaction_1)
+
+    filtered_list = manager.filter_by_date_range("01/10/2026", "31/10/2026")
+
+    assert filtered_list == []
+    assert len(filtered_list) == 0

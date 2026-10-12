@@ -26,15 +26,12 @@ def get_row_colors(manager, custom_list=None):
 
 def parse_amount(amount_string):
 
-    try:
-        amount_validated = float(amount_string)
-        if amount_validated <= 0:
-            sg.popup_error("El monto debe ser positivo")
-            return None
-        return amount_validated
-    except ValueError:
-        sg.popup_error("El monto debe ser un número válido")
-        return None
+    amount_validated = float(amount_string)
+
+    if amount_validated <= 0:
+        raise ValueError("El monto deber ser positivo")
+    return amount_validated
+
 
 def validate_isnot_future_date(selected_date):
 
@@ -69,8 +66,10 @@ def process_transaction_form(values,manager,transaction_type):
         return False
 
     # Validate amount format
-    amount_validated = parse_amount(amount_values)
-    if amount_validated is None:
+    try:
+        amount_validated = parse_amount(amount_values)
+    except ValueError:
+        sg.popup_error("El monto debe ser un número válido y mayor a cero.")
         return False
 
     category_obj = next(c for c in manager.category_list if c.name == category_values)
@@ -123,26 +122,17 @@ layout = [
     [sg.Button("Exportar CSV")],
 ]
 
-def make_layout_income(category_list):
-
+def make_layout_transaction(title_text, category_list):
     return [
-        [sg.Text("Añadir Nuevo Ingreso")],
-        [sg.Text("Fecha:"), sg.Input(key="-DATE-",size=(15,1),disabled=True,default_text=date.today().strftime("%d/%m/%Y")),
-        sg.CalendarButton("Seleccionar Fecha",target="-DATE-",format="%d/%m/%Y")],
-        [sg.Text("Título:"), sg.Input(key="-TITLE-",size=(35,1))],
-        [sg.Text("Monto:"), sg.Input(key="-AMOUNT-",size=(15,1),)],
-        [sg.Text("Categoría:"), sg.Combo(values=category_list, key="-CATEGORY-",readonly=True)],
-        [sg.Button("Guardar"), sg.Button("Cancelar")],
-    ]
-
-def make_layout_expense(category_list):
-    return [
-        [sg.Text("Añadir Nuevo Gasto")],
-        [sg.Text("Fecha:"), sg.Input(key="-DATE-",disabled=True,size=(15,1),default_text=date.today().strftime("%d/%m/%Y")),
-        sg.CalendarButton("Seleccionar Fecha",target="-DATE-",format="%d/%m/%Y")],
-        [sg.Text("Título:"), sg.Input(key="-TITLE-",size=(35,1))],
-        [sg.Text("Monto:"), sg.Input(key="-AMOUNT-",size=(15,1))],
-        [sg.Text("Categoría:"), sg.Combo(values=category_list, key="-CATEGORY-",expand_x=True,readonly=True)],
+        [sg.Text(title_text)],
+        [
+            sg.Text("Fecha:"), 
+            sg.Input(key="-DATE-", size=(15, 1), disabled=True, default_text=date.today().strftime("%d/%m/%Y")),
+            sg.CalendarButton("Seleccionar Fecha", target="-DATE-", format="%d/%m/%Y")
+        ],
+        [sg.Text("Título:"), sg.Input(key="-TITLE-", size=(35, 1))],
+        [sg.Text("Monto:"), sg.Input(key="-AMOUNT-", size=(15, 1))],
+        [sg.Text("Categoría:"), sg.Combo(values=category_list, key="-CATEGORY-", readonly=True)],
         [sg.Button("Guardar"), sg.Button("Cancelar")],
     ]
 
@@ -194,7 +184,7 @@ while True:
         category_names = get_category_names(manager)
         if category_names is not None:
             window_income = sg.Window(
-                "Añadir Ingresos", make_layout_income(category_names)
+                "Añadir Ingresos", make_layout_transaction("Añadir Nuevo Ingreso",category_names)
             )
 
             while True:
@@ -216,7 +206,7 @@ while True:
         category_names = get_category_names(manager)
         if category_names is not None:
             window_expense = sg.Window(
-                "Añadir Gastos", make_layout_expense(category_names))
+                "Añadir Gastos", make_layout_transaction("Añadir Nuevo Gasto",category_names))
 
             while True:
                 event_expense, values_expense = window_expense.read()
@@ -248,18 +238,17 @@ while True:
                         sg.popup_error("Por favor ingresa un nombre y selecciona un color.")
                         continue
 
-                    #Validate duplicate category name
-                    clean_name = values_category["-NAME-"].strip().lower()
-                    if any(c.name.strip().lower() == clean_name for c in manager.category_list):
-                        sg.popup_error("La categoría que intentó ingresar ya existe.")
-                        continue
+                    try:
+                        new_cat = Category(
+                            name=values_category["-NAME-"], color=values_category["-COLOR-"]
+                            )
+                        manager.add_category(new_cat)
+                        save_data(manager)
+                        break
 
-                    new_cat = Category(
-                        name=values_category["-NAME-"], color=values_category["-COLOR-"]
-                        )
-                    manager.add_category(new_cat)
-                    save_data(manager)
-                    break
+                    except ValueError as error:
+                        sg.popup_error(str(error))
+                        continue
 
                 if event_category in (sg.WIN_CLOSED,"Cancelar"):
                     break
