@@ -1,0 +1,421 @@
+{
+  "info": {
+    "_postman_id": "f44d9981-d504-40e9-9805-88a9ffc3e554",
+    "name": "Chess.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59045057",
+    "_collection_link": "https://go.postman.co/collection/59045057-f44d9981-d504-40e9-9805-88a9ffc3e554?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Player data",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.chess.com/pub/player/Mmerayo",
+          "protocol": "https",
+          "host": [
+            "api",
+            "chess",
+            "com"
+          ],
+          "path": [
+            "pub",
+            "player",
+            "Mmerayo"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Player data - Hikaru",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/player/Hikaru",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "player",
+                "Hikaru"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": ":status",
+              "value": "200"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 26 Oct 2026 00:08:19 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "x-chesscom-matched",
+              "value": "None"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"82d223b1b6f50a67317cb47629f44c3f\""
+            },
+            {
+              "key": "last-modified",
+              "value": "Monday, 26-Oct-2026 00:04:08 GMT+0000"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "cache-control",
+              "value": "public, max-age=5"
+            },
+            {
+              "key": "expires",
+              "value": "Mon, 26 Oct 2026 00:08:24"
+            },
+            {
+              "key": "x-chesscom-meta",
+              "value": "lean=cached"
+            },
+            {
+              "key": "x-chesscom-request-id-lb",
+              "value": "955ee3f16cc1d41fef8731cfa6689056"
+            },
+            {
+              "key": "x-chesscom-request-id-cdn",
+              "value": "a50533ca1f784d9d-IAD"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-chesscom-ingress-pool",
+              "value": "k8s-prod-fpm-catch-all"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":1.0,\"max_age\":604800}"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "REVALIDATED"
+            },
+            {
+              "key": "link",
+              "value": "<https://api.chess.com/context/Player.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+            },
+            {
+              "key": "vary",
+              "value": "accept-encoding"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=QXfKPxj30XiYhMWoGGJ0enlCU%2FfXRe1zuLFLHJRokaCqt78UP37WTYIRAqbFf4tBO5wNzgppVlHXtlYjK8be7z4zA8w5EBaLiWo%2FgeMk2oCmxP9dhObaBiYOLZ3Vy3UD2aAkwoe0CP1%2Bq7qVWUNb0uxi2hzHaMcWv%2FSdNcG9jIosF8S6zVMiP4H2Mos7jJm%2BIg%3D%3D\"}]}"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a50539d1781de16c-SJO"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"avatar\": \"https://images.chesscomfiles.com/uploads/v1/user/15448422.88c010c1.200x200o.3c5619f5441e.png\",\n  \"player_id\": 15448422,\n  \"@id\": \"https://api.chess.com/pub/player/hikaru\",\n  \"url\": \"https://www.chess.com/member/Hikaru\",\n  \"name\": \"Hikaru Nakamura\",\n  \"username\": \"hikaru\",\n  \"title\": \"GM\",\n  \"followers\": 1419937,\n  \"country\": \"https://api.chess.com/pub/country/US\",\n  \"location\": \"Florida\",\n  \"last_online\": 1792968511,\n  \"joined\": 1389043258,\n  \"status\": \"premium\",\n  \"is_streamer\": true,\n  \"twitch_url\": \"https://twitch.tv/gmhikaru\",\n  \"verified\": false,\n  \"league\": \"Legend\",\n  \"streaming_platforms\": [\n    {\n      \"type\": \"twitch\",\n      \"channel_url\": \"https://twitch.tv/gmhikaru\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Player stats",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.chess.com/pub/player/Mmerayo/stats",
+          "protocol": "https",
+          "host": [
+            "api",
+            "chess",
+            "com"
+          ],
+          "path": [
+            "pub",
+            "player",
+            "Mmerayo",
+            "stats"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Player stats - Mmerayo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/player/Mmerayo/stats",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "player",
+                "Mmerayo",
+                "stats"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": ":status",
+              "value": "200"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 26 Oct 2026 00:07:34 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"b5439f6e047f40fcd415eab219b69bef\""
+            },
+            {
+              "key": "x-chesscom-matched",
+              "value": "pubapi_player_stats"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "last-modified",
+              "value": "Monday, 26-Oct-2026 00:03:08 GMT+0000"
+            },
+            {
+              "key": "cache-control",
+              "value": "public, max-age=5"
+            },
+            {
+              "key": "expires",
+              "value": "Mon, 26 Oct 2026 00:07:39"
+            },
+            {
+              "key": "x-chesscom-meta",
+              "value": "lean=published"
+            },
+            {
+              "key": "x-chesscom-request-id-lb",
+              "value": "526ab4f385ed8200b2409434a810b273"
+            },
+            {
+              "key": "x-chesscom-request-id-cdn",
+              "value": "a50532346888567d-IAD"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-chesscom-ingress-pool",
+              "value": "k8s-prod-fpm-catch-all"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":1.0,\"max_age\":604800}"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "REVALIDATED"
+            },
+            {
+              "key": "vary",
+              "value": "accept-encoding"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=AlnVGO4UIlrBQGtgV1WP0dQL03d%2FPpwgA3CaQwwZ57175q8jKZaMKDnZ4zYGmTW6XyqT7AT7Np%2BGfu%2BcICTs85pdjZa85yl1x55gfvR3Wqy6WO05cQIK6WdmQ6mSMP8v0HGa1UR2z%2BDkyEY0865pdDZdeds3DnU49Kxe717zZARMGfr3nyFDR61vC%2FZqrBCuDg%3D%3D\"}]}"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a50538b7ea8ee16c-SJO"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"chess_rapid\": {\n    \"last\": {\n      \"rating\": 1053,\n      \"date\": 1775158085,\n      \"rd\": 49\n    },\n    \"best\": {\n      \"rating\": 1116,\n      \"date\": 1772432176,\n      \"game\": \"https://www.chess.com/game/live/25644540985\"\n    },\n    \"record\": {\n      \"win\": 426,\n      \"loss\": 342,\n      \"draw\": 42\n    }\n  },\n  \"chess_bullet\": {\n    \"last\": {\n      \"rating\": 489,\n      \"date\": 1774920649,\n      \"rd\": 120\n    },\n    \"best\": {\n      \"rating\": 783,\n      \"date\": 1630533511,\n      \"game\": \"https://www.chess.com/game/live/81472950171\"\n    },\n    \"record\": {\n      \"win\": 97,\n      \"loss\": 109,\n      \"draw\": 5\n    }\n  },\n  \"chess_blitz\": {\n    \"last\": {\n      \"rating\": 512,\n      \"date\": 1790530638,\n      \"rd\": 80\n    },\n    \"best\": {\n      \"rating\": 881,\n      \"date\": 1683163013,\n      \"game\": \"https://www.chess.com/game/live/80437827809\"\n    },\n    \"record\": {\n      \"win\": 738,\n      \"loss\": 734,\n      \"draw\": 65\n    }\n  },\n  \"fide\": 0,\n  \"tactics\": {\n    \"highest\": {\n      \"rating\": 1715,\n      \"date\": 1758290998\n    },\n    \"lowest\": {\n      \"rating\": 1561,\n      \"date\": 1772389249\n    }\n  },\n  \"puzzle_rush\": {\n    \"best\": {\n      \"total_attempts\": 21,\n      \"score\": 18\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "List of tournaments participated by player",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "List of tournaments participated by player - Hikaru",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/player/Hikaru/games/archives",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "player",
+                "Hikaru",
+                "games",
+                "archives"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": ":status",
+              "value": "200"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 26 Oct 2026 01:23:51 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "x-chesscom-matched",
+              "value": "pubapi_player_games_archives"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"e60f838edc3237c753f7f53bf630d769\""
+            },
+            {
+              "key": "last-modified",
+              "value": "Friday, 02-Oct-2026 22:10:24 GMT+0000"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "cache-control",
+              "value": "public, max-age=60"
+            },
+            {
+              "key": "expires",
+              "value": "Mon, 26 Oct 2026 01:24:39"
+            },
+            {
+              "key": "x-chesscom-meta",
+              "value": "lean=cached"
+            },
+            {
+              "key": "x-chesscom-request-id-lb",
+              "value": "7731b58a2e6bb4eadc0dc729b9251690"
+            },
+            {
+              "key": "x-chesscom-request-id-cdn",
+              "value": "a4470bd5c89dace3-IAD"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-chesscom-ingress-pool",
+              "value": "k8s-prod-fpm-catch-all"
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":1.0,\"max_age\":604800}"
+            },
+            {
+              "key": "age",
+              "value": "11"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "HIT"
+            },
+            {
+              "key": "link",
+              "value": "<https://api.chess.com/context/GameArchives.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+            },
+            {
+              "key": "vary",
+              "value": "accept-encoding"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=T%2BUK4hnGc0h40B02CFvNyfLve9VQyREUSMlUUWWxT8KTgFQrLt8%2FOT1xBewkoZ%2F%2BIVh5DnD9JHlHSzb8oR%2BxGwN3hBhFYELckFPNgz6%2Bs%2FY%2FrjReiQXo6CDHvJ4mRm87Mvp8lNhhXmyofr%2FISxoRUeSDO5MbdS772DnPPkjFPMiP6Q8H7SrsvObqlJ9zRw0fow%3D%3D\"}]}"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "cf-ray",
+              "value": "a505a878e9c5b15e-SJO"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"archives\": [\n    \"https://api.chess.com/pub/player/hikaru/games/2014/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2014/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2015/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2016/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2017/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2018/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2019/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2020/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2021/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2022/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2023/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2024/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/10\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/11\",\n    \"https://api.chess.com/pub/player/hikaru/games/2025/12\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/01\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/02\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/03\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/04\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/05\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/06\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/07\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/08\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/09\",\n    \"https://api.chess.com/pub/player/hikaru/games/2026/10\"\n  ]\n}"
+        }
+      ]
+    }
+  ]
+}
