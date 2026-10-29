@@ -23,5 +23,4 @@ venv/
 *.json
 
 #Exceptions
-!/postman/
-!/postman/*.json
+!Fundamentos-internet/postman/*.json
