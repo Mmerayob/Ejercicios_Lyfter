@@ -14,10 +14,13 @@ venv/
 .vscode/
 .idea/
 
+# Logs & Temp files
+*.log
+*.tmp
+
 # Data files
 *.csv
 *.json
 
-# Logs & Temp files
-*.log
-*.tmp
+#Exceptions
+!Fundamentos-internet/postman/*.json
