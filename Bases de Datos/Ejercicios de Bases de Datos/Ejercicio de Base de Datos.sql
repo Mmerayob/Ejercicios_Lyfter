@@ -12,12 +12,12 @@ CREATE TABLE `Invoices`(
     `Invoice Number` TEXT NOT NULL,
     `Purchase Date` DATE NOT NULL,
     `Buyer Email` TEXT NOT NULL,
-    `Total Amount` DOUBLE NOT NULL
+    `Total Amount` DECIMAL(8, 2) NOT NULL
 );
 CREATE TABLE `Products Per Invoice`(
     `Id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Quantity` INT NOT NULL,
-    `Total Amount` DOUBLE NOT NULL,
+    `Total Amount` DECIMAL(8, 2) NOT NULL,
     `Product Id` BIGINT NOT NULL,
     `Invoice Id` BIGINT NOT NULL
 );
