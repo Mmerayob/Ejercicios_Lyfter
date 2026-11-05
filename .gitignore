@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 *.pyd
 .pytest_cache/
+**/cache/
 
 # Virtual enviorment
 env/
@@ -17,6 +18,8 @@ venv/
 # Logs & Temp files
 *.log
 *.tmp
+*.TAG
+
 
 # Data files
 *.csv
